@@ -1,0 +1,2731 @@
+<style>
+  /* =========================================
+     GLOBAL WIDGET STYLES & FONT
+     ========================================= */
+  
+  .me-widget-scope {
+    font-family: "Zoho Puvi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .me-widget-scope * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* =========================================
+     HERO SECTION
+     ========================================= */
+  
+  .me-hero-section {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+    text-align: left;
+  }
+
+  .me-hero-title {
+    color: #FFFFFF;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .me-hero-desc {
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 1.4; 
+    letter-spacing: 0;
+    font-weight: 300;
+    margin: 0;
+    max-width: 900px;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .me-hero-title { font-size: 32px; line-height: 1.2; }
+    .me-hero-desc { font-size: 16px; line-height: 1.5; }
+  }
+
+/* =========================================
+     SEARCH BAR STYLES (New)
+     ========================================= */
+  
+  .me-search-container {
+    position: relative;
+    max-width: 600px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .me-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 33%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #9CA3AF; /* Light Gray Icon */
+    pointer-events: none; /* Lets clicks pass through to the input */
+    /* NEW LINES TO ADD */
+    z-index: 10;      /* Brings icon to the front */
+    display: block;   /* Fixes vertical alignment issues */
+  }
+
+  .me-search-input {
+    width: 100%;
+    padding: 14px 16px 14px 48px; /* Left padding makes room for icon */
+    font-size: 16px;
+    font-family: "Zoho Puvi", sans-serif;
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.15); /* Glass Effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .me-search-input::placeholder {
+    color: #D1D5DB;
+    opacity: 0.8;
+  }
+
+  /* Focus State - Orange Brand Color */
+  .me-search-input:focus {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: #ff6600;
+    box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.2);
+  }
+
+  /* Utility Class to Hide Items/Sections via JS */
+  .me-hidden {
+    display: none !important;
+  }
+
+  /* No Results Message */
+  .me-no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 300;
+    display: none; /* Hidden by default */
+  }
+
+/* Search Feedback Text */
+  .me-search-feedback {
+    margin-top: 12px;
+    color: #F3F4F6;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 20px;
+    opacity: 0; /* Hidden by default */
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    padding-left: 16px; /* Align with text input text */
+  }
+  
+  .me-search-feedback.visible {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  /* =========================================
+   STICKY NAV STYLES (Dynamic Background)
+   ========================================= */
+
+.me-catalog-nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 90px; /* Matches your menu height */
+  z-index: 999;
+  
+  /* DEFAULT STATE: Transparent (looks good on Hero) */
+  background: transparent; 
+  box-shadow: none;
+  
+  padding: 15px 0;
+  border-bottom: none;
+  width: 100%;
+  margin-bottom: 20px;
+  
+  /* Smooth transition for the color change */
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* SCROLLED STATE: Dark Glass (Activated by JS) */
+.me-catalog-nav.me-nav-scrolled {
+  background: rgba(0, 0, 0, 0.9); /* Dark background kicks in */
+  backdrop-filter: blur(12px);     /* Blur kicks in */
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Adds shadow for separation */
+}
+
+.me-nav-inner {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start; 
+  gap: 12px;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+  .me-nav-btn {
+    text-decoration: none;
+    color: #D1D5DB; 
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 10px; 
+    
+    flex: 1;             
+    min-width: 200px;    
+    text-align: center;  
+    display: flex;       
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 4px; 
+    
+    background-color: rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-family: "Zoho Puvi", sans-serif;
+  }
+
+  .me-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  .me-nav-btn.active {
+    background-color: #ff6600 !important;
+    color: #FFFFFF !important;
+    border-color: #ff6600 !important;
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
+  }
+
+  /* =========================================
+     SECTIONS & HEADINGS
+     ========================================= */
+
+  section.me-featured-section {
+    scroll-margin-top: 100px; 
+    padding: 20px 0 40px;
+    background: transparent;
+  }
+
+  .me-featured-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .me-featured-heading {
+    font-size: 28px;
+    font-weight: 400; 
+    margin-bottom: 16px;
+    color: #FFFFFF; 
+    border-left: 5px solid #ff6600; 
+    padding-left: 15px;
+    display: inline-block;
+    line-height: 1.2;
+  }
+  
+  .me-section-copy {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 40px;
+    max-width: 950px;
+  }
+
+  .me-section-divider {
+    border: 0;
+    border-top: 1px solid #374151;
+    max-width: 1180px;
+    margin: 0 auto;
+    opacity: 0.5;
+  }
+
+  /* =========================================
+     GRID & CARDS
+     ========================================= */
+
+  .me-course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .me-course-grid { grid-template-columns: 1fr; }
+    .me-nav-inner { overflow-x: auto; padding-bottom: 10px; }
+    .me-section-copy br { display: none; }
+  }
+
+  /* Card Container */
+  .me-course-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E5E7EB;
+  }
+
+  .me-course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .me-course-link {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  /* BANNER STYLES */
+  .me-course-banner {
+    flex: 0 0 42%; 
+    background: #FFFFFF; 
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* IMAGE STYLES */
+  .me-course-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    transition: transform 0.5s ease;
+  }
+
+  .me-course-card:hover .me-course-banner-img {
+    transform: scale(1.05);
+  }
+
+  .me-course-body {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .me-course-title {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px 0;
+  }
+
+  .me-course-subtitle {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6B7280;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 400;
+  }
+
+  /* RATING STYLES */
+  .me-course-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px; 
+    font-size: 13px;
+  }
+  .me-stars { color: #FBBF24; letter-spacing: 1px; }
+  .me-rating-value { font-weight: 600; color: #374151; }
+
+  /* PRODUCT NAME STYLES (Blue) */
+  .me-course-count {
+    font-size: 13px;
+    color: #2563EB; /* Blue */
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* BADGE STYLES */
+  .me-bundle-badge {
+    display: inline-block;
+    background-color: #F3F4F6; 
+    color: #000000; 
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    letter-spacing: 0; 
+    text-transform: uppercase;
+    border: 1px solid #E5E7EB; 
+  }
+
+  .me-course-footer {
+    padding-top: 15px;
+    border-top: 1px solid #F3F4F6;
+  }
+  .me-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .me-author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: #e5e7eb;
+  }
+  .me-author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  @media (max-width: 600px) {
+    .me-course-link { flex-direction: column; }
+    .me-course-banner { flex: 0 0 220px; width: 100%; }
+  }
+
+/* =========================================
+     5. SIDEBAR LAYOUT (New)
+     ========================================= */
+  
+  /* The Parent Wrapper: Holds Sidebar + Content */
+  .me-layout-container {
+    display: flex;
+    align-items: flex-start; /* Aligns them at the top */
+    gap: 40px; /* Space between Sidebar and Content */
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 60px;
+  }
+
+  /* The Left Column: Sticky Sidebar */
+  .me-sidebar {
+    width: 280px; /* Increased slightly to accommodate padding */
+    flex-shrink: 0;
+    
+    /* STICKY MAGIC */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 180px; 
+    
+    /* UPDATED: Dark Background Styling */
+    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent bg */
+    backdrop-filter: blur(12px);          /* Glass blur effect */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border all around */
+    border-radius: 16px;                  /* Rounded corners */
+    padding: 24px 24px 12px 24px;                        /* Inner spacing */
+    
+    /* Scrollable */
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+
+  /* The Right Column: Course Grids */
+  .me-content-wrapper {
+    flex: 1; /* Takes up all remaining space */
+    min-width: 0; /* Critical fix for Grid inside Flexbox */
+  }
+
+  /* Filter Typography */
+  .me-filter-group {
+    margin-bottom: 30px;
+  }
+
+  .me-filter-title {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .me-filter-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #D1D5DB;
+    font-size: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .me-filter-label:hover {
+    color: #FFFFFF;
+  }
+
+  /* Custom Checkbox Styling */
+  .me-filter-checkbox {
+    accent-color: #ff6600; /* Brand Orange Checkbox */
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+/* Removes the bottom margin from the last filter group so it sits tight */
+.me-sidebar .me-filter-group:last-child {
+  margin-bottom: 0;
+}
+
+  /* Mobile Responsiveness: Hide Sidebar on Tablets/Phones */
+  @media (max-width: 1024px) {
+    .me-sidebar {
+      display: none; /* Hides sidebar on smaller screens */
+    }
+    .me-layout-container {
+      display: block; /* Reverts to single column */
+    }
+  }
+
+</style>
+
+<div class="me-widget-scope">
+
+  <div class="me-hero-section">
+    <h1 class="me-hero-title">ManageEngine User Academy Learning Catalog</h1>
+    <p class="me-hero-desc">Whether you're just getting started or deepening your expertise, our catalog makes it easy to find learning paths that fit your goals. Browse through foundational courses, advanced bundles, real-world use cases, and product-specific training, each crafted to help you build practical, skills and expertise.</p>
+    
+    <div class="me-search-container">
+       <svg class="me-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+       </svg>
+       <input type="text" id="meSearchInput" class="me-search-input" placeholder="Search for courses, products, or topics...">
+       <div id="meSearchFeedback" class="me-search-feedback"></div>
+    </div>    
+  </div>
+
+  <nav class="me-catalog-nav">
+    <div class="me-nav-inner">
+      <a href="#foundational" class="me-nav-btn active">Foundational Series</a>
+      <a href="#bundles" class="me-nav-btn">IAM & SIEM Bundles</a>
+      <a href="#courses" class="me-nav-btn">Skill Badges</a>
+      <a href="#resources" class="me-nav-btn">Additional Resources</a>
+    </div>
+  </nav>
+
+ <div id="meNoResults" class="me-no-results">No courses found matching your search.</div>
+ <div class="me-layout-container">
+  <aside class="me-sidebar">
+    <div class="me-filter-group">
+      <div class="me-filter-title">Filter by Type</div>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="IAM">
+        IAM
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="SIEM">
+        SIEM
+      </label>
+    </div>
+    <div class="me-filter-group">
+      <div class="me-filter-title">Filter by Product</div>    
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="ADManager Plus">
+        ADManager Plus
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="ADAudit Plus">
+        ADAudit Plus
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="ADSelfService Plus">
+        ADSelfService Plus
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="M365 Manager Plus">
+        M365 Manager Plus
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="RecoveryManager Plus">
+        RecoveryManager Plus
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="EventLog Analyzer">
+        EventLog Analyzer
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="Log360">
+        Log360
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="Log360 Cloud">
+        Log360 Cloud
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="Cloud Security Plus">
+        Cloud Security Plus
+      </label>
+      <label class="me-filter-label">
+        <input type="checkbox" class="me-filter-checkbox" value="DataSecurity Plus">
+        DataSecurity Plus
+      </label>
+    </div>
+  </aside>
+  <div class="me-content-wrapper">
+  <section id="foundational" class="me-featured-section">
+    <div class="me-featured-inner">
+      <h2 class="me-featured-heading">Foundational Series</h2>
+      <p class="me-section-copy">
+        Build a solid starting point with essential IAM and SIEM fundamentals.<br>
+        These starter kits give you the core concepts and hands-on grounding<br>
+        you need before advancing into deeper product or domain learning.
+      </p>
+      
+      <div class="me-course-grid">
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/clientapp/app/course/22205000000005009/course-details" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000200003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="ADSelfService Plus" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">ADSelfService Plus Starter Kit</h3>
+                <p class="me-course-subtitle">Jumpstart your journey with the ADSelfService Plus Starter Kit—expert guidance and resources, all for free.</p>
+                <div class="me-course-rating">
+                  <span class="me-stars">★★★★☆</span>
+                  <span class="me-rating-value">4.8 · 49 ratings</span>
+                </div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Hariharan | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/clientapp/app/course/22205000000005090/course-details" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000198006?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="ADManager Plus" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">ADManager Plus Starter Kit</h3>
+                <p class="me-course-subtitle">Jumpstart your journey with the ADManager Plus Starter Kit—expert guidance and resources, all for free.</p>
+                <div class="me-course-rating">
+                  <span class="me-stars">★★★★☆</span>
+                  <span class="me-rating-value">4.9 · 51 ratings</span>
+                </div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000246034?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Hariram | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+         <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/clientapp/app/course/22205000000005170/course-details" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000207001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="ADAudit Plus" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">ADAudit Plus Starter Kit</h3>
+                <p class="me-course-subtitle">Jumpstart your journey with the ADAudit Starter Kit—expert guidance and resources, all for free.</p>
+                <div class="me-course-rating">
+                  <span class="me-stars">★★★★☆</span>
+                  <span class="me-rating-value">4.4 · 40 ratings</span>
+                </div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000249008?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Terence | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/clientapp/app/course/22205000000005256/course-details" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000194022?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="M365Manager Plus" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">M365Manager Plus Starter Kit</h3>
+                <p class="me-course-subtitle">Jumpstart your journey with the M365 Manager Plus Starter Kit—expert guidance and resources.</p>
+                <div class="me-course-rating">
+                  <span class="me-stars">★★★★★</span>
+                  <span class="me-rating-value">5.0 · 31 ratings</span>
+                </div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000246034?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Hariram | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="me-section-divider">
+
+  <section id="bundles" class="me-featured-section">
+    <div class="me-featured-inner">
+      <h2 class="me-featured-heading">IAM and SIEM Bundles</h2>
+      <p class="me-section-copy">
+        Structured learning pathways that bring together the capabilities that matter—<br>
+        Identity Governance, ITDR, Compliance and more. Each bundle offers a cohesive,<br>
+        end-to-end progression designed to strengthen real-world expertise.
+      </p>
+
+      <div class="me-course-grid">
+        
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-governance-administration-iga/" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000204003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="IGA" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Governance & Administration (IGA)</h3>
+                <p class="me-course-subtitle">Master the principles of enterprise identity governance across hybrid environments. Learn to automate lifecycle management, enforce access policies, and implement secure, compliant identity frameworks that balance efficiency with control.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 51 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>8 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/compliance-risk-management/" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000209002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Compliance" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Compliance & Risk Management</h3>
+                <p class="me-course-subtitle">Monitor and govern hybrid IT environments with unified auditing and risk assessment.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.4 · 37 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>6 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/workforce-lifecycle-management/" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Workforce" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Workforce Lifecycle Management</h3>
+                <p class="me-course-subtitle">Automate and secure every stage of the employee identity journey—from onboarding to offboarding.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.5 · 42 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>7 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-threat-detection-response-itdr/" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214009?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="ITDR" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Threat Detection & Response (ITDR)</h3>
+                <p class="me-course-subtitle">Detect and respond to identity-centric threats across hybrid environments. Learn to baseline behavior, analyze risk signals, and implement real-time threat defense frameworks that reinforce identity security.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 47 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>9 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-security/" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Identity Security" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Security</h3>
+                <p class="me-course-subtitle">Protect enterprise identities across hybrid environments by combining strong authentication, adaptive access controls, and behavioral analytics.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 36 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>6 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-orchestration/" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000216001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Orchestration" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Orchestration</h3>
+                <p class="me-course-subtitle">Automate and coordinate identity operations across hybrid environments through unified workflows and governance controls.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.1 · 39 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>8 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/remote-workforce-enablement" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Remote Workforce" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Remote Workforce Enablement</h3>
+                <p class="me-course-subtitle">Secure and streamline remote workforce operations through identity automation and adaptive authentication.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 29 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>8 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/hybrid-identity-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000209003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Hybrid Identity" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Hybrid Identity Management</h3>
+                <p class="me-course-subtitle">Unify and govern identities across on-premises and cloud environments by synchronizing directories and enforcing policies.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.5 · 27 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>5 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-fabric" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000217001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Identity Fabric" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Fabric</h3>
+                <p class="me-course-subtitle">Build a unified identity ecosystem across hybrid and cloud environments by integrating governance and analytics.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 32 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>8 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/adaptive-governance" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000216002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Adaptive Governance" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Adaptive Governance</h3>
+                <p class="me-course-subtitle">Learn how to automate and refine access governance. Gain practical skills in conditional access and adaptive policy enforcement.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 48 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>4 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-security-posture-management-ispm" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="ISPM" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Security Posture (ISPM)</h3>
+                <p class="me-course-subtitle">Monitor and strengthen identity security by unifying analytics, compliance auditing, and continuous risk assessment.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 35 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>6 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/cyber-resilience" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Cyber Resilience" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Cyber Resilience</h3>
+                <p class="me-course-subtitle">Protect critical identity and data systems by unifying monitoring, automated response, and reliable recovery.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.9 · 27 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>8 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/identity-intelligence" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000218001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Identity Intelligence" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Identity Intelligence</h3>
+                <p class="me-course-subtitle">Enhance visibility and security by leveraging behavioral analytics and risk intelligence to uncover identity-centric threats.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 31 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>7 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/cybersecurity-mesh" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000219001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Cybersecurity Mesh" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Cybersecurity Mesh</h3>
+                <p class="me-course-subtitle">Unify monitoring, analytics, and access controls to build a distributed security architecture that enables scalable operations.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.9 · 39 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>10 Course Series</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                   <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="me-section-divider">
+
+  <section id="courses" class="me-featured-section">
+    <div class="me-featured-inner">
+      <h2 class="me-featured-heading">Skill Badges</h2>
+      <p class="me-section-copy">
+        A comprehensive library of focused, instructor-led courses covering<br>
+        identity, security, and product mastery. Choose the exact skill you need<br>
+        next and deepen your expertise at your own pace.
+      </p>
+
+      <div class="me-course-grid">
+        
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-user-management-and-administration" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000181073?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="AD User Management" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory User Management and Administration</h3>
+                <p class="me-course-subtitle">Learn the essentials of user account creation, modification, and management in Active Directory. Streamline operations with bulk management and policy-based automation.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 39 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-group-computer-and-contact-management-and-administration" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000200001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="AD Group Management" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Group, Computer and Contact Management</h3>
+                <p class="me-course-subtitle">Learn to manage and automate the core directory objects—groups, computers, and contacts—that define your organization’s identity structure.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 27 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-reports" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000200002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="AD Reporting" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Reporting</h3>
+                <p class="me-course-subtitle">Gain complete visibility into your AD environment through user, group, computer, password, and NTFS reports.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.9 · 44 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/gpo-management-and-administration-in-active-directory" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000204002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="GPO Management" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">GPO Management and Administration</h3>
+                <p class="me-course-subtitle">Master Group Policy Object (GPO) management to enforce consistent configurations and security settings. Learn creation, linking, and reporting techniques.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.1 · 30 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-scheduled-automation" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000202001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Scheduled Automation" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Scheduled Automation</h3>
+                <p class="me-course-subtitle">Automate routine administrative tasks through scheduled workflows that enhance efficiency and consistency.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 41 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-event-driven-automation" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000201002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Event Driven" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Event-Driven Automation</h3>
+                <p class="me-course-subtitle">Discover how event-triggered workflows transform identity management. Build orchestration and webhook-based automations that respond instantly.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 25 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-workflows" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000203001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Workflows" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Workflows</h3>
+                <p class="me-course-subtitle">Streamline AD change management with structured, role-based workflows. Configure request, review, and approval processes.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 37 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-help-desk-management-delegation" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000204001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Help Desk" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Help Desk Management & Delegation</h3>
+                <p class="me-course-subtitle">Delegate administrative control securely through OU, group, and site-based scopes. Learn to define roles and manage technicians.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.4 · 33 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-cleanup" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000206001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Cleanup" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Cleanup</h3>
+                <p class="me-course-subtitle">Ensure directory hygiene by identifying and removing inactive, obsolete, or orphaned accounts. Learn automated cleanup techniques.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.5 · 29 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/access-governance-risk-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000198004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Access Governance" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Access Governance & Risk Management</h3>
+                <p class="me-course-subtitle">Strengthen compliance and minimize access risks through certification campaigns, identity risk assessments, and privileged entity oversight.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 42 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-entra-id-backup-and-recovery" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000201001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Backup" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory & Entra ID Backup and Recovery</h3>
+                <p class="me-course-subtitle">Master the principles of directory backup and recovery across on-premises AD and Entra ID. Learn to protect identity data.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.0 · 26 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/hybrid-identity-governance-and-administration" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000198004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Hybrid IGA" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Hybrid Identity Governance and Administration</h3>
+                <p class="me-course-subtitle">Unify on-premises AD and Entra ID management under a single governance framework. Automate provisioning and policy enforcement.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 35 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-auditing" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="AD Auditing" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Auditing and Reporting</h3>
+                <p class="me-course-subtitle">Monitor changes across users, groups, computers, logons, and policies with structured audit data. Learn how to track events, analyze activity, and generate consolidated reports.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 34 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/file-server-auditing" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214006?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="File Server" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">File Server Auditing</h3>
+                <p class="me-course-subtitle">Audit access events, permission changes, and file activity across Windows and storage platforms. Learn how to generate reports and configure alerts.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 27 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/windows-server-auditing" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000216003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Windows Server" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Windows Server Auditing</h3>
+                <p class="me-course-subtitle">Monitor server logons, replication events, endpoint actions, and user activity patterns. Learn how security analytics enhance visibility.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 41 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/workstation-auditing" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000217003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Workstation" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Workstation Auditing</h3>
+                <p class="me-course-subtitle">Audit Windows and macOS workstation activity with clear visibility into system events and user actions across both platforms.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.1 · 29 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/compliance-auditing-reporting" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000217002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Compliance" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Compliance Auditing & Reporting</h3>
+                <p class="me-course-subtitle">Learn how to generate, interpret, and operationalize compliance reports across major regulatory frameworks using ADAudit Plus.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 38 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/user-entity-and-behavior-analytics" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000210005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="UEBA" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">User and Entity Behavior Analytics</h3>
+                <p class="me-course-subtitle">Identify anomalous activity across logins, movement patterns, and privileged actions. Learn how behavioral analytics helps detect malicious logins.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.9 · 44 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/hybrid-identity-auditing-and-reporting" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000217004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Hybrid Auditing" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Hybrid Identity Auditing and Reporting</h3>
+                <p class="me-course-subtitle">Audit user, group, role, license, application, and device activities in Entra ID. Learn how ADAudit Plus provides structured visibility.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 25 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADAudit Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/self-service-password-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Password Management" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Self-Service Password Management</h3>
+                <p class="me-course-subtitle">Enable users to reset passwords, unlock accounts, and update credentials securely. Learn real-time synchronization and authentication controls.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.9 · 44 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADSelfService Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/endpoint-application-mfa" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="MFA" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Endpoint & Application MFA</h3>
+                <p class="me-course-subtitle">Enforce MFA across enterprise apps, endpoints, and access flows. Learn how ADSelfService Plus secures Windows, macOS, Linux, and VPN.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 41 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADSelfService Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/enterprise-single-sign-on-sso" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000216004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="SSO" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Enterprise Single Sign-On (SSO)</h3>
+                <p class="me-course-subtitle">Implement SAML, OAuth, and OIDC-based SSO for unified authentication. Learn to streamline access with password synchronization.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 38 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADSelfService Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/password-policies-and-conditional-access" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000218002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Password Policies" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Password Policies and Enforcement</h3>
+                <p class="me-course-subtitle">Enforce stronger password standards and meet compliance requirements. Apply password rules and conditional access to strengthen authentication.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 42 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADSelfService Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/self-service-directory-profile-updates" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Directory Updates" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Self-Service Directory & Profile Updates</h3>
+                <p class="me-course-subtitle">Empower users to securely update their directory profiles. Design intuitive layouts, enforce validation rules, and audit changes transparently.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 41 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>ADSelfService Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/unified-m365-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000205002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Unified Management" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Unified M365 Management</h3>
+                <p class="me-course-subtitle">Manage Exchange Online, Entra ID, SharePoint Online, and Teams from a unified console. Automate M365 administration and enforce policies.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 28 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>M365 Manager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/unified-m365-auditing-and-reporting" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000219002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Unified Auditing" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Unified M365 Auditing and Reporting</h3>
+                <p class="me-course-subtitle">Gain centralized visibility into Exchange Online and Entra ID activity. Learn how to audit changes, track user actions, and generate reports.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.4 · 32 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>M365 Manager Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/unified-m365-alerting-and-monitoring" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000209004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Unified Alerting" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Unified M365 Alerting and Monitoring</h3>
+                <p class="me-course-subtitle">Monitor Exchange Online, Entra ID, and Microsoft 365 activities through alerts. Learn how to observe service activity and trigger notifications.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 36 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>M365 Manager Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/unified-m365-automation-and-delegation" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000209005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Unified Automation" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Unified M365 Automation and Delegation</h3>
+                <p class="me-course-subtitle">Delegate Microsoft 365 administrative tasks with controlled, role-based access. Enable secure help desk delegation for governed operations.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 40 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>M365 Manager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/active-directory-granular-restore-rollback" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000220001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="AD Backup" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Active Directory Backup and Recovery</h3>
+                <p class="me-course-subtitle">Protect and restore directory data with structured backup, version control, and disaster recovery techniques. Learn how to back up AD objects and roll back changes.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 41 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>RecoveryManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/entra-id-and-microsoft-365-backup-and-recovery" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000219003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Entra ID Backup" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Entra ID and Microsoft 365 Backup and Recovery</h3>
+                <p class="me-course-subtitle">Back up and restore critical Entra ID and Microsoft 365 data with structured protection workflows. Learn how to configure reliable backup routines.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.5 · 33 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>RecoveryManager Plus</span>
+                </div>
+                <div class="me-bundle-badge">IAM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000266001?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bill Anderson | IAM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/log-collection-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000216005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Log Collection" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Log Collection & Management</h3>
+                <p class="me-course-subtitle">Collect, parse, and manage logs from diverse systems using agent-based and agentless methods. Learn how to handle syslog and event logs.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 38 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>EventLog Analyzer</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/application-server-log-auditing" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000209006?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Log Auditing" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Application & Server Log Auditing</h3>
+                <p class="me-course-subtitle">Audit application and server activity across Windows, Linux/Unix, IIS, databases, and cloud infrastructure. Learn how EventLog Analyzer detects key events.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 29 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>EventLog Analyzer</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/network-device-monitoring" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Network Monitoring" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Network Device Monitoring</h3>
+                <p class="me-course-subtitle">Monitor logs from routers, switches, firewalls, VPNs, and IDS/IPS systems to maintain network visibility. Learn to collect and interpret network device activity.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 42 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>EventLog Analyzer</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/real-time-log-search-forensics" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000216006?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Log Search" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Real-time Log Search & Forensics</h3>
+                <p class="me-course-subtitle">Search logs in real time, identify actionable patterns, and perform forensic investigations. Learn how to analyze events and generate custom reports.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.5 · 33 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>EventLog Analyzer</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/threat-analytics-and-detection" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000209007?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Threat Analytics" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Threat Analytics & Detection</h3>
+                <p class="me-course-subtitle">Detect security threats across Windows systems, vulnerabilities, and privileged actions. Learn how analytics and alerting strengthen incident response.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.1 · 27 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>EventLog Analyzer</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/unified-log-collection-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Unified Logs" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Unified Log Collection & Management</h3>
+                <p class="me-course-subtitle">Centralize log collection and management across directories, endpoints, syslog devices, and databases. Learn how Log360 ingests and secures log data.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.4 · 30 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/real-time-event-correlation-security-analytics" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000219004?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Event Correlation" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Real-time Event Correlation & Security Analytics</h3>
+                <p class="me-course-subtitle">Correlate security events in real time and transform raw logs into meaningful security insights. Learn about alerting and Active Directory monitoring.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 35 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/user-entity-behavior-analytics-ueba-with-log360" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000218003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="UEBA Log360" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">User & Entity Behavior Analytics (UEBA)</h3>
+                <p class="me-course-subtitle">Detect behavioral anomalies, assess entity risk, and identify threats with analytics-driven insights. Learn peer grouping and risk scoring.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 28 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/incident-response-and-workflow-automation" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000210006?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Incident Response" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Incident Response and Workflow Automation</h3>
+                <p class="me-course-subtitle">Automate incident handling with structured workflows, playbooks, and ticketing integrations. Learn to streamline SOC operations.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 41 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/cloud-native-log-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000220002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Cloud Logs" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Cloud-Native Log Management</h3>
+                <p class="me-course-subtitle">Manage cloud-native log ingestion and monitoring through a scalable SIEM framework. Learn about collecting logs from supported sources.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 29 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360 Cloud</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/behavioral-analytics-for-cloud-identities" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000220003?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Cloud UEBA" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Behavioral Analytics for Cloud Identities</h3>
+                <p class="me-course-subtitle">Analyze cloud identity behavior to detect anomalies, risks, and unusual activity. Learn about UEBA models, dashboards, and watchlists.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 36 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360 Cloud</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/cloud-threat-detection-response" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000217005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Cloud Threat" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Cloud Threat Detection & Response</h3>
+                <p class="me-course-subtitle">Detect cloud-based threats, investigate security events, and manage incidents through centralized alerting. Learn to analyze threat patterns.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.8 · 44 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Log360 Cloud</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/cloud-access-security-broker" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000210007?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="CASB" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Cloud Access Security Broker</h3>
+                <p class="me-course-subtitle">Understand the core purpose and functionality of a Cloud Access Security Broker (CASB). Learn how CASB strengthens cloud security by providing visibility, control, and policy enforcement.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.4 · 31 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Cloud Security Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/cloud-security-posture-management" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000210008?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="CSPM" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Cloud Security Posture Management</h3>
+                <p class="me-course-subtitle">Evaluate and strengthen security posture across AWS and Azure environments. Learn how cloud platform configurations, activities, and controls are assessed.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.7 · 38 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Cloud Security Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/saas-application-security-monitoring" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000215006?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="SaaS Security" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">SaaS Application Security Monitoring</h3>
+                <p class="me-course-subtitle">Monitor security events across leading SaaS applications to maintain visibility and control. Learn how Salesforce and Google Cloud Platform activity is assessed.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.2 · 27 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>Cloud Security Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/file-server-auditing-integrity-monitoring" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000214007?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="File Auditing" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">File Server Auditing & Integrity Monitoring</h3>
+                <p class="me-course-subtitle">Audit file server activity, detect unauthorized file changes, and analyze storage usage. Learn how DataSecurity Plus delivers auditing and file analysis.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.6 · 35 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>DataSecurity Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/data-risk-assessment" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000210009?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="Data Risk" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Data Risk Assessment</h3>
+                <p class="me-course-subtitle">Identify sensitive data, evaluate exposure risks, and prioritize remediation. Learn how DataSecurity Plus discovers, classifies, and assesses risky data.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★★</span>
+                   <span class="me-rating-value">4.9 · 44 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>DataSecurity Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/saas-application-security-monitoring" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000219005?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" alt="DLP" class="me-course-banner-img">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Data Loss Protection</h3>
+                <p class="me-course-subtitle">Prevent unauthorized data transfers and protect sensitive information across endpoints. Learn how DataSecurity Plus applies DLP controls to monitor and secure data.</p>
+                <div class="me-course-rating">
+                   <span class="me-stars">★★★★☆</span>
+                   <span class="me-rating-value">4.3 · 29 ratings</span>
+                </div>
+                <div class="me-course-count">
+                   <span>DataSecurity Plus</span>
+                </div>
+                <div class="me-bundle-badge">SIEM</div>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-avatar" style="background-image:url('https://previewengine-accl.zoho.in/image/TC/22205000000250002?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==&width=99999&height=99999');"></span>
+                  <span class="me-author-name">Bob Whitman | SIEM Specialist</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="me-section-divider">
+
+  <section id="resources" class="me-featured-section">
+    <div class="me-featured-inner">
+      <h2 class="me-featured-heading">Additional Resources</h2>
+      <p class="me-section-copy">
+        Access a curated collection of supporting materials, expert guides, and<br>
+        specialty courses that enhance your learning experience. These resources help<br>
+        you dive deeper, stay updated, and explore topics that complement your core IAM and SIEM training.
+      </p>
+
+      <div class="me-course-grid">
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/enterprise-password-management-with-adselfservice-plus" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000010013?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" class="me-course-banner-img" alt="Enterprise Password Management">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Enterprise Password Management with ADSelfService Plus</h3>
+                <p class="me-course-subtitle">Transform enterprise password processes and productivity using ADSelfService Plus</p>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-name" style="color:#2563EB;">Access Resource &rarr;</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/modernized-identity-security-for-educational-institutions" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000010013?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" class="me-course-banner-img" alt="Identity Security for Education">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Modernized Identity Security for Educational Institutions</h3>
+                <p class="me-course-subtitle">Streamlining identity protection and access for educational institutions via ADSelfService Plus</p>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-name" style="color:#2563EB;">Access Resource &rarr;</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="me-course-card">
+          <a href="https://useracademy.manageengine.com/course/mastering-iam-with-ad360" class="me-course-link" target="_blank">
+            <div class="me-course-banner">
+              <img src="https://previewengine-accl.zoho.in/thumbnail/TC/22205000000010013?cli-msg=eyJkYlNwYWNlIjoiNjAwNDc5NTIyNjEifQ==" class="me-course-banner-img" alt="Mastering IAM with AD360">
+            </div>
+            <div class="me-course-body">
+              <div>
+                <h3 class="me-course-title">Mastering IAM with AD360</h3>
+                <p class="me-course-subtitle">Secure, Simplify and Streamline your IAM strategy with ManageEngine AD360</p>
+              </div>
+              <div class="me-course-footer">
+                <div class="me-author">
+                  <span class="me-author-name" style="color:#2563EB;">Access Resource &rarr;</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+ </div> </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  /* =========================================
+     1. VARIABLES & SETUP
+     ========================================= */
+  const sections = document.querySelectorAll("section.me-featured-section");
+  const navLinks = document.querySelectorAll(".me-nav-btn");
+  const navBar = document.querySelector('.me-catalog-nav');
+  const searchInput = document.getElementById('meSearchInput');
+  const allCards = document.querySelectorAll('.me-course-card');
+  const noResultsMsg = document.getElementById('meNoResults');
+  const sectionCopies = document.querySelectorAll('.me-section-copy'); 
+  
+  // Sidebar Inputs
+  const typeCheckboxes = document.querySelectorAll('.me-filter-checkbox[value="IAM"], .me-filter-checkbox[value="SIEM"]');
+  // Select all checkboxes that are NOT type (assuming remaining are products)
+  const productCheckboxes = document.querySelectorAll('.me-filter-group:not(:first-child) .me-filter-checkbox');
+
+  // Create Feedback Element (if missing)
+  let searchFeedback = document.getElementById('meSearchFeedback'); 
+  if (!searchFeedback && searchInput) {
+      searchFeedback = document.createElement('div');
+      searchFeedback.id = 'meSearchFeedback';
+      searchFeedback.className = 'me-search-feedback';
+      searchInput.parentNode.appendChild(searchFeedback);
+  }
+
+  /* =========================================
+     2. VISUAL EFFECTS (Glass Nav & ScrollSpy)
+     ========================================= */
+  
+  // Dynamic Glass Background
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navBar.classList.add('me-nav-scrolled');
+    } else {
+      navBar.classList.remove('me-nav-scrolled');
+    }
+  });
+
+  // ScrollSpy (Active Button Highlight)
+  const observerOptions = { root: null, rootMargin: "-100px 0px -70% 0px", threshold: 0 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((link) => link.classList.remove("active"));
+        const id = entry.target.getAttribute("id");
+        const activeLink = document.querySelector(`.me-nav-btn[href="#${id}"]`);
+        if (activeLink) activeLink.classList.add("active");
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+       navLinks.forEach(l => l.classList.remove('active'));
+       this.classList.add('active');
+    });
+  });
+
+  /* =========================================
+     3. CORE FILTERING LOGIC
+     ========================================= */
+  function filterContent() {
+    const term = searchInput.value.toLowerCase().trim();
+    
+    // Get checked values
+    const selectedTypes = Array.from(typeCheckboxes)
+        .filter(cb => cb.checked).map(cb => cb.value.toLowerCase());
+    const selectedProducts = Array.from(productCheckboxes)
+        .filter(cb => cb.checked).map(cb => cb.value.toLowerCase());
+
+    let totalVisible = 0;
+    const isFiltering = term.length > 0 || selectedTypes.length > 0 || selectedProducts.length > 0;
+
+    // A. UX: Hide Section Descriptions if filtering
+    if (isFiltering) {
+      sectionCopies.forEach(copy => copy.style.display = 'none');
+    } else {
+      sectionCopies.forEach(copy => copy.style.display = 'block');
+      searchFeedback.classList.remove('visible'); // Hide feedback if reset
+    }
+
+    // B. Filter Cards
+    allCards.forEach(card => {
+      const title = card.querySelector('.me-course-title')?.textContent.toLowerCase() || '';
+      const desc = card.querySelector('.me-course-subtitle')?.textContent.toLowerCase() || '';
+      const product = card.querySelector('.me-course-count')?.textContent.toLowerCase() || ''; 
+      const badge = card.querySelector('.me-bundle-badge')?.textContent.toLowerCase() || '';   
+
+      // 1. Check Search Term
+      const combinedText = title + " " + desc + " " + product + " " + badge;
+      const matchesSearch = term === '' || combinedText.includes(term);
+
+      // 2. Check Type Filter
+      let matchesType = true;
+      if (selectedTypes.length > 0) {
+         // Strict mode: If card has no badge, it hides when type filter is on
+         matchesType = badge ? selectedTypes.includes(badge) : false;
+      }
+
+      // 3. Check Product Filter
+      let matchesProduct = true;
+      if (selectedProducts.length > 0) {
+          // Check if the card text contains the selected product name
+          matchesProduct = selectedProducts.some(p => combinedText.includes(p));
+      }
+
+      // Final Decision
+      if (matchesSearch && matchesType && matchesProduct) {
+        card.classList.remove('me-hidden');
+        totalVisible++;
+      } else {
+        card.classList.add('me-hidden');
+      }
+    });
+
+    // C. Manage Section Visibility (Hide Empty Headers)
+    sections.forEach(section => {
+      const visibleCards = section.querySelectorAll('.me-course-card:not(.me-hidden)').length;
+      const hr = section.nextElementSibling; // The separator line
+      
+      if (visibleCards === 0) {
+        section.classList.add('me-hidden');
+        if (hr && hr.tagName === 'HR') hr.classList.add('me-hidden');
+      } else {
+        section.classList.remove('me-hidden');
+        if (hr && hr.tagName === 'HR') hr.classList.remove('me-hidden');
+      }
+    });
+
+    // D. Update Feedback Text ("Found X results")
+    if (isFiltering) {
+       searchFeedback.textContent = `Found ${totalVisible} results`;
+       searchFeedback.classList.add('visible');
+    }
+
+    // E. Show/Hide "No Results" Message
+    if (totalVisible === 0) {
+      noResultsMsg.style.display = 'block';
+    } else {
+      noResultsMsg.style.display = 'none';
+    }
+  }
+
+  /* =========================================
+     4. EVENT LISTENERS (Auto-Scroll Trigger)
+     ========================================= */
+  
+  function triggerAutoScroll() {
+    // Only scroll if user is near the top (Hero View)
+    if (window.scrollY < 100) {
+       navBar.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // Search Listener
+  if (searchInput) {
+    searchInput.addEventListener('keyup', function() {
+       if (this.value.length > 0) triggerAutoScroll();
+       filterContent();
+    });
+  }
+
+  // Checkbox Listeners (Type & Product)
+  const allCheckboxes = document.querySelectorAll('.me-filter-checkbox');
+  allCheckboxes.forEach(box => {
+      box.addEventListener('change', function() {
+         triggerAutoScroll();
+         filterContent();
+      });
+  });
+
+});
+</script>
